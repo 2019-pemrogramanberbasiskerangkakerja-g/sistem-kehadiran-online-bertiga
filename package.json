@@ -1,0 +1,23 @@
+{
+  "name": "sistem-kehadiran-online-bertiga",
+  "version": "1.0.0",
+  "description": "#### Member: - Nirmala - 05111540007003 - Ariiq Firanda N - 05111640000083 - Faizal Khilmi Muzakki - 05111640000120",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/2019-pemrogramanberbasiskerangkakerja-g/sistem-kehadiran-online-bertiga.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/2019-pemrogramanberbasiskerangkakerja-g/sistem-kehadiran-online-bertiga/issues"
+  },
+  "homepage": "https://github.com/2019-pemrogramanberbasiskerangkakerja-g/sistem-kehadiran-online-bertiga#readme",
+  "dependencies": {
+    "express": "^4.16.4",
+    "squirrelly": "^7.1.1"
+  }
+}

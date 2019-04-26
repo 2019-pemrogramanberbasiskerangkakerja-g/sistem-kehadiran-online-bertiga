@@ -15,9 +15,24 @@ app.get('/', function (req, res) {
     })
 })
 
+app.get('/mhs/login', function(req, res){
+    res.render('mhs/login')
+});
+
 var server = app.listen(3000, function () { // This starts the server
     console.log("Server engine squirelly listening to request on port 3000");
 });
+
+Sqrl.definePartial("head_mhs", `
+    <title>Login Mahasiswa</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+`);
+
+Sqrl.definePartial("foot_mhs", `
+    <script type="text/javascript" src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+`);
 
 Sqrl.definePartial("head", `
   <title>Squirelly Bertiga</title>
@@ -35,19 +50,19 @@ Sqrl.definePartial("head", `
   }
   p {font-size: 16px;}
   .margin {margin-bottom: 45px;}
-  .bg-1 { 
+  .bg-1 {
     background-color: #1abc9c; /* Green */
     color: #ffffff;
   }
-  .bg-2 { 
+  .bg-2 {
     background-color: #474e5d; /* Dark Blue */
     color: #ffffff;
   }
-  .bg-3 { 
+  .bg-3 {
     background-color: #ffffff; /* White */
     color: #555555;
   }
-  .bg-4 { 
+  .bg-4 {
     background-color: #2f2f2f; /* Black Gray */
     color: #fff;
   }
@@ -73,6 +88,6 @@ Sqrl.definePartial("head", `
 Sqrl.definePartial("foot", `
 <!-- Footer -->
 <footer class="container-fluid bg-4 text-center">
-  <p>Test site <a href="#">Made by team bertiga.</a></p> 
+  <p>Test site <a href="#">Made by team bertiga.</a></p>
 </footer>
 `)

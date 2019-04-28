@@ -46,6 +46,27 @@ app.post('/mhs/auth', function(request, response) {
 	}
 });
 
+app.post('/mhs/reg', function(request, response) {
+  var username = request.body.nrp;
+  var nama = nama;
+  var password = md5(request.body.password);
+	if (username && nama && password) {
+		connection.query('INSERT INTO mahasiswas(nrp, name, password) VALUES (?,?,?)', [username, password], function(error, results, fields) {
+			if (results.length > 0) {
+				request.session.loggedin = true;
+				request.session.username = username;
+				response.redirect('/home');
+			} else {
+				response.send('Registration Failed');
+			}			
+			response.end();
+		});
+	} else {
+		response.send('Please enter Username, Name and Password!');
+		response.end();
+	}
+});
+
 app.get('/home', function(request, response) {
 	if (request.session.loggedin) {
     response.render('mhs/home', {

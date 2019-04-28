@@ -4,12 +4,65 @@ var Sqrl = require('squirrelly')
 
 app.set('view engine', 'squirrelly')
 
+var mysql = require('mysql');
+var session = require('express-session');
+var bodyParser = require('body-parser');
+var path = require('path');
+var md5 = require('md5');
+var connection = mysql.createConnection({
+    host     : 'localhost',
+    user     : 'root',
+    password : '',
+    database : 'sisabs'
+});
+
+app.use(session({
+	secret: 'secret',
+	resave: true,
+	saveUninitialized: true
+}));
+
+app.use(bodyParser.urlencoded({extended : true}));
+app.use(bodyParser.json());
+
+app.post('/mhs/auth', function(request, response) {
+	var username = request.body.username;
+  var password = md5(request.body.password);
+  console.log(password)
+	if (username && password) {
+		connection.query('SELECT * FROM mahasiswas WHERE nrp = ? AND password = ?', [username, password], function(error, results, fields) {
+			if (results.length > 0) {
+				request.session.loggedin = true;
+				request.session.username = username;
+				response.redirect('/home');
+			} else {
+				response.send('Incorrect Username and/or Password!');
+			}			
+			response.end();
+		});
+	} else {
+		response.send('Please enter Username and Password!');
+		response.end();
+	}
+});
+
+app.get('/home', function(request, response) {
+	if (request.session.loggedin) {
+    response.render('mhs/home', {
+      NRP: request.session.username,
+    })
+	} else {
+		response.send('Please login to view this page!');
+	}
+	response.end();
+});
+
 app.get('/', function (req, res) {
     res.render('index', {
         name_1: 'Nirmala',
         nrp_1: '0511154000700',
         name_2: 'Ariiq Firanda N',
-        nrp_2: '05111640000083',
+        nrp_2: '05111640000083',  
         name_3: 'Faizal Khilmi Muzakki',
         nrp_3: '05111640000120',
     })
@@ -17,6 +70,11 @@ app.get('/', function (req, res) {
 
 app.get('/mhs/login', function(req, res){
     res.render('mhs/login')
+});
+
+app.get('/mhs/logout', function(req, res){
+  req.session.loggedin = false;
+  response.redirect('/mhs/login');
 });
 
 var server = app.listen(3000, function () { // This starts the server

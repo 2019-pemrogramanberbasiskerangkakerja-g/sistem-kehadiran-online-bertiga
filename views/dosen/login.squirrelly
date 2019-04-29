@@ -122,7 +122,7 @@
                     <div class="card card-signin my-5">
                         <div class="card-body">
                             <h5 class="card-title text-center">Login Dosen</h5>
-                            <form class="form-signin" action="/mhs/auth" method="POST">
+                            <form class="form-signin" action="/dosen/auth" method="POST">
                                 <div class="form-label-group">
                                     <input type="text" id="username" name="username" class="form-control" placeholder="Username" required autofocus>
                                     <label for="username">Username</label>

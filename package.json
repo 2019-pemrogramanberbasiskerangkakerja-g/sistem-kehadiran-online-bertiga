@@ -18,6 +18,8 @@
   "homepage": "https://github.com/2019-pemrogramanberbasiskerangkakerja-g/sistem-kehadiran-online-bertiga#readme",
   "dependencies": {
     "express": "^4.16.4",
+    "express-session": "^1.16.1",
+    "md5": "^2.2.1",
     "mysql": "^2.17.1",
     "squirrelly": "^7.1.1"
   }

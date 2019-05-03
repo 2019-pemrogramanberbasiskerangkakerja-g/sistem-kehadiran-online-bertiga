@@ -35,7 +35,7 @@ con.connect(function(err){
     });
 
     var query = "CREATE TABLE meetings(" +
-        "id INT AUTO_INCREMENT PRIMARY KEY, kode_matkul VARCHAR(20), day CHAR(10), start_time TIME, end_time TIME,  FOREIGN KEY (kode_matkul) REFERENCES matkuls(kode)" +
+        "id INT AUTO_INCREMENT PRIMARY KEY, kode_matkul VARCHAR(20), day VARCHAR(10), start_time TIME, end_time TIME,  FOREIGN KEY (kode_matkul) REFERENCES matkuls(kode)" +
     ")";
     con.query(query, function (error, results) {
       if (error) throw error;
@@ -48,6 +48,14 @@ con.connect(function(err){
     con.query(query, function (error, results) {
       if (error) throw error;
       console.log('Attendace table created successfully');
+    });
+
+    var query = "CREATE TABLE participants(" +
+        "id INT AUTO_INCREMENT PRIMARY KEY, kode_matkul VARCHAR(20), nrp VARCHAR(30), FOREIGN KEY (kode_matkul) REFERENCES matkuls(kode), FOREIGN KEY (nrp) REFERENCES mahasiswas(nrp)" +
+    ")";
+    con.query(query, function (error, results) {
+      if (error) throw error;
+      console.log('Participant table created successfully');
     });
 
 

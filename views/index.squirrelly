@@ -37,7 +37,7 @@
 <div class="container-fluid bg-2 text-center" id="what">
   <h3 class="margin">What are we doing?</h3>
   <p>We are trying to fulfill our duty to get better grade in Framework Based Programming.</p>
-  <a href="/sikemas" class="btn btn-default btn-lg">
+  <a href="/" class="btn btn-default btn-lg">
     <span class="glyphicon glyphicon-log-in"></span> Sistem Kehadiran Online
   </a>
 </div>

@@ -1,26 +1,16 @@
 {
-  "name": "sistem-kehadiran-online-bertiga",
+  "name": "api_pbkk",
   "version": "1.0.0",
-  "description": "#### Member: - Nirmala - 05111540007003 - Ariiq Firanda N - 05111640000083 - Faizal Khilmi Muzakki - 05111640000120",
+  "description": "",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/2019-pemrogramanberbasiskerangkakerja-g/sistem-kehadiran-online-bertiga.git"
-  },
   "author": "",
   "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/2019-pemrogramanberbasiskerangkakerja-g/sistem-kehadiran-online-bertiga/issues"
-  },
-  "homepage": "https://github.com/2019-pemrogramanberbasiskerangkakerja-g/sistem-kehadiran-online-bertiga#readme",
   "dependencies": {
+    "body-parser": "^1.19.0",
     "express": "^4.16.4",
-    "express-session": "^1.16.1",
-    "md5": "^2.2.1",
-    "mysql": "^2.17.1",
-    "squirrelly": "^7.1.1"
+    "lowdb": "^1.0.0"
   }
 }

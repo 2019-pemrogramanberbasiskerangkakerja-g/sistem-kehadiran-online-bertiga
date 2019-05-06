@@ -35,7 +35,7 @@ con.connect(function(err){
     });
 
     var query = "CREATE TABLE meetings(" +
-        "id INT AUTO_INCREMENT PRIMARY KEY, kode_matkul VARCHAR(20), day VARCHAR(10), start_time TIME, end_time TIME,  FOREIGN KEY (kode_matkul) REFERENCES matkuls(kode)" +
+        "id INT AUTO_INCREMENT PRIMARY KEY, kode_matkul VARCHAR(20), day VARCHAR(10), start_date DATETIME, end_date DATETIME,  FOREIGN KEY (kode_matkul) REFERENCES matkuls(kode)" +
     ")";
     con.query(query, function (error, results) {
       if (error) throw error;

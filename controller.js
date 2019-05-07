@@ -8,7 +8,19 @@ exports.absen = function(req, res) {
     var ruang = req.params.ruang;
     var nrp = req.params.nrp;
 
-    response.err('on progress hehe', res);
+    var read = db.read()
+    var row = db.get('attendances')
+                .find({ ruang: ruang, nrp: nrp })
+                .value()
+
+    if(row == undefined){
+        var insert = db.get('attendances')
+                    .push({ id_meeting: row.id_meeting, ruang: ruang, nrp: nrp, absen_at: Date(Date.now()) })
+                    .write()
+        response.ok(insert, res)
+    }
+    else
+        response.err('Kamu dah absen bro', res);
 };
 
 //rekap kuliah per semester
@@ -76,7 +88,7 @@ exports.tambahPeserta = function(req, res) {
                         .find({ nrp: nrp })
                         .value()
 
-        if(row == undefined) response.err('Mahasiswa kosong bro', res);
+        if(row == undefined) response.err('Mahasiswa jangan ngawur bro', res);
         else{
             var insert = db.get('participants')
                         .push({ nrp: nrp, kode_matkul: kodeMatkul })
@@ -92,7 +104,6 @@ exports.tambahMatkul = function(req, res) {
     var kodeMatkul = req.body.kodeMatkul;
     var name = req.body.name;
     var kelas = req.body.kelas;
-    var nip = parseInt(req.body.nip);
 
     var read = db.read()
     var row = db.get('matkuls')
@@ -100,17 +111,10 @@ exports.tambahMatkul = function(req, res) {
                 .value()
 
     if(row == undefined){
-        var row = db.get('dosens')
-                        .find({ nip: nip })
-                        .value()
-
-        if(row == undefined) response.err('Dosen kosong bro', res);
-        else {
-            var insert = db.get('matkuls')
-                        .push({ kode_matkul: kodeMatkul, name: name, kelas: kelas, nip: nip })
-                        .write()
-            response.ok(insert, res)
-        }
+        var insert = db.get('matkuls')
+                    .push({ kode_matkul: kodeMatkul, name: name, kelas: kelas })
+                    .write()
+        response.ok(insert, res)
     }
     else
         response.err('Matkul sudah ada bro', res);
@@ -120,8 +124,21 @@ exports.tambahMatkul = function(req, res) {
 exports.tambahJadwal = function(req, res) {
     var kodeMatkul = req.body.kodeMatkul;
     var day = req.body.day;
-    var kelas = req.body.kelas;
-    var nip = req.body.nip;
+    var ruang = req.body.ruang;
+    var masuk = req.body.masuk;
+    var selesai = req.body.selesai;
 
-    response.err('on progress hehe', res);
+    var read = db.read()
+    var row = db.get('meetings')
+                .find({ ruang: ruang, masuk: masuk })
+                .value()
+
+    if(row == undefined){
+        var insert = db.get('meetings')
+                    .push({ kode_matkul: kodeMatkul, day: day, ruang: ruang, masuk: masuk, selesai: selesai })
+                    .write()
+        response.ok(insert, res)
+    }
+    else
+        response.err('Kelas dah kepake bro', res);
 };

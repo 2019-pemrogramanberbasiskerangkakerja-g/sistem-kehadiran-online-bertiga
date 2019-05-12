@@ -9,25 +9,69 @@ exports.absen = function(req, res) {
     var nrp = req.params.nrp;
 
     var read = db.read()
-    var row = db.get('attendances')
-                .find({ ruang: ruang, nrp: nrp })
+    var row = db.get('meetings')
+                .find({ ruang: ruang })
                 .value()
 
-    if(row == undefined){
-        var insert = db.get('attendances')
-                    .push({ id_meeting: row.id_meeting, ruang: ruang, nrp: nrp, absen_at: Date(Date.now()) })
-                    .write()
-        response.ok(insert, res)
+    if(row){
+        matkul = row.kode_matkul
+        mulai_kelas = row.masuk.split(':')
+        selesai_kelas = row.selesai.split(':')
+        meeting = row.id_meeting
+        //kelas = row.kelas
+
+        var row = db.get('participants')
+                    .find({ kode_matkul: matkul, nrp: nrp })
+                    .value()
+        
+        if(row){
+            waktu_absen = new Date()
+            jam_absen = waktu_absen.getHours()
+            menit_absen = waktu_absen.getMinutes()
+            jam_mulai_kelas = mulai_kelas[0]
+            menit_mulai_kelas = mulai_kelas[1]
+            jam_selesai_kelas = selesai_kelas[0]
+            menit_selesai_kelas = selesai_kelas[1]
+
+            if(((jam_absen = jam_mulai_kelas && menit_absen >= menit_mulai_kelas) || jam_absen > jam_mulai_kelas) && (jam_absen < jam_selesai_kelas || (jam_absen = jam_selesai_kelas && menit_absen <= menit_selesai_kelas))) {
+                var row = db.get('attendances')
+                .find({ ruang: ruang, nrp: nrp })
+                .value()
+            
+                if(row == undefined){
+                    var insert = db.get('attendances')
+                                .push({ id_meeting: id_meeting, ruang: ruang, nrp: nrp, absen_at: waktu_absen })
+                                .write()
+                    response.ok(insert, res)
+                }
+                else
+                    response.err('Kamu dah absen bro', res)
+                }
+            else
+                response.err('Gabisa absen sekarang bro', res)
+            }
+        else
+            response.err('Kamu ga di kelas itu bro', res)
     }
     else
-        response.err('Kamu dah absen bro', res);
+        response.err('Ga ada kelas disana bro', res);
 };
 
 //rekap kuliah per semester
 exports.rekapPerSemester = function(req, res) {
     var kodeMatkul = parseInt(req.params.kodeMatkul);
 
-    response.err('on progress hehe', res);
+    var read = db.read()
+    var result = db.get('meetings')
+                .filter({ kode_matkul: kodeMatkul })
+                .value()
+
+    if(row){
+        response.ok(result, res)
+    }
+    else
+        response.err('Internal Server Error', res);
+    //response.err('on progress hehe', res);
 };
 
 //rekap kuliah per pertemuan
@@ -35,26 +79,84 @@ exports.rekapPerPertemuan = function(req, res) {
     var kodeMatkul = parseInt(req.params.kodeMatkul);
     var day = req.params.day;
 
-    response.err('on progress hehe', res);
+    var read = db.read()
+    var result = db.get('meetings')
+                .filter({ kode_matkul: kodeMatkul, day:day })
+                .value()
+
+    if(row){
+        response.ok(result, res)
+    }
+    else
+        response.err('Internal Server Error', res);
+
+    //response.err('on progress hehe', res);
 };
 
 //rekap mhs per kuliah
 exports.rekapMhsPerKuliah = function(req, res) {
     var kodeMatkul = parseInt(req.params.kodeMatkul);
     var nrp = parseInt(req.params.nrp);
+    var final = []
 
-    response.err('on progress hehe', res);
+    var read = db.read()
+    var row = db.get('participants')
+                .filter({ nrp: nrp, kode_matkul: kode_matkul })
+                .value()
+
+    if(row){
+        row.forEach(function(idx) {
+            var result = db.get('meetings')
+                .filter({ kode_matkul: idx.kode_matkul })
+                .value()
+            final.push(result)
+        })
+        response.ok(final, res)
+    }
+    else
+        response.err('Internal Server Error', res);
+
+    //response.err('on progress hehe', res);
 };
 
 //rekap mhs per semester
 exports.rekapMhsPerSemester = function(req, res) {
     var semester = parseInt(req.params.semester);
     var nrp = parseInt(req.params.nrp);
+    var final = []
 
-    response.err('on progress hehe', res);
+    var read = db.read()
+    var row = db.get('matakuls')
+                .filter({ smester: semester })
+                .value()
+
+    if(row){
+        row.forEach(function(idx) {
+            var result = db.get('participant')
+                .filter({ kode_matkul: idx.kode_matkul, nrp: nrp })
+                .value()
+        })
+        
+        if(result){
+            result.forEach(function(idx) {
+                var results = db.get('meetings')
+                    .filter({ kode_matkul: idx.kode_matkul })
+                    .value()
+                final.push(results)
+            })
+            response.ok(final, res)
+        }
+        else
+            response.err('Internal Server Error', res)
+    }
+    else
+        response.err('Internal Server Error', res)
+
+    //response.err('on progress hehe', res);
 };
 
 exports.tambahMahasiswa = function(req, res) {
+    //console.log(req)
     var nrp = parseInt(req.body.nrp);
     var name = req.body.name;
     var password = req.body.password;
@@ -71,6 +173,7 @@ exports.tambahMahasiswa = function(req, res) {
         response.ok(insert, res)
     }
     else
+        console.log(row)
         response.err('Mahasiswa sudah ada bro', res);
 };
 
@@ -104,6 +207,7 @@ exports.tambahMatkul = function(req, res) {
     var kodeMatkul = req.body.kodeMatkul;
     var name = req.body.name;
     var kelas = req.body.kelas;
+    var semester = req.body.semester;
 
     var read = db.read()
     var row = db.get('matkuls')
@@ -112,7 +216,7 @@ exports.tambahMatkul = function(req, res) {
 
     if(row == undefined){
         var insert = db.get('matkuls')
-                    .push({ kode_matkul: kodeMatkul, name: name, kelas: kelas })
+                    .push({ kode_matkul: kodeMatkul, name: name, kelas: kelas, semester: semester })
                     .write()
         response.ok(insert, res)
     }
@@ -141,4 +245,24 @@ exports.tambahJadwal = function(req, res) {
     }
     else
         response.err('Kelas dah kepake bro', res);
+};
+
+exports.tambahDosen = function(req, res) {
+    var nip = parseInt(req.body.nip);
+    var name = req.body.name;
+    var password = req.body.password;
+
+    var read = db.read()
+    var row = db.get('dosens')
+                .find({ nip: nip })
+                .value()
+
+    if(row == undefined){
+        var insert = db.get('dosens')
+                    .push({ nip: nip, name: name, password: password })
+                    .write()
+        response.ok(insert, res)
+    }
+    else
+        response.err('Dosen sudah ada bro', res);
 };

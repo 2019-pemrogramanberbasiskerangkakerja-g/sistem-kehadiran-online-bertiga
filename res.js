@@ -11,7 +11,7 @@ exports.ok = function(values, res) {
 
 exports.err = function(message, res) {
   var data = {
-      'status': 404,
+      'status': 500,
       'message': message
   };
   res.json(data);

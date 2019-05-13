@@ -6,7 +6,7 @@ var db = require('./conn');
 //absen
 exports.absen = function(req, res) {
     var ruang = req.params.ruang;
-    var nrp = req.params.nrp;
+    var nrp = parseInt(req.params.nrp);
 
     var read = db.read()
     var row = db.get('meetings')
@@ -14,10 +14,11 @@ exports.absen = function(req, res) {
                 .value()
 
     if(row){
-        matkul = row.kode_matkul
-        mulai_kelas = row.masuk.split(':')
-        selesai_kelas = row.selesai.split(':')
-        meeting = row.id_meeting
+        console.log(row)
+        var matkul = row.kode_matkul
+        var mulai_kelas = row.masuk.split(':')
+        var selesai_kelas = row.selesai.split(':')
+        var id_meeting = row.id_meeting
         //kelas = row.kelas
 
         var row = db.get('participants')
@@ -25,13 +26,13 @@ exports.absen = function(req, res) {
                     .value()
         
         if(row){
-            waktu_absen = new Date()
-            jam_absen = waktu_absen.getHours()
-            menit_absen = waktu_absen.getMinutes()
-            jam_mulai_kelas = mulai_kelas[0]
-            menit_mulai_kelas = mulai_kelas[1]
-            jam_selesai_kelas = selesai_kelas[0]
-            menit_selesai_kelas = selesai_kelas[1]
+            var waktu_absen = new Date()
+            var jam_absen = waktu_absen.getHours()
+            var menit_absen = waktu_absen.getMinutes()
+            var jam_mulai_kelas = mulai_kelas[0]
+            var menit_mulai_kelas = mulai_kelas[1]
+            var jam_selesai_kelas = selesai_kelas[0]
+            var menit_selesai_kelas = selesai_kelas[1]
 
             if(((jam_absen = jam_mulai_kelas && menit_absen >= menit_mulai_kelas) || jam_absen > jam_mulai_kelas) && (jam_absen < jam_selesai_kelas || (jam_absen = jam_selesai_kelas && menit_absen <= menit_selesai_kelas))) {
                 var row = db.get('attendances')
@@ -66,7 +67,7 @@ exports.rekapPerSemester = function(req, res) {
                 .filter({ kode_matkul: kodeMatkul })
                 .value()
 
-    if(row){
+    if(result){
         response.ok(result, res)
     }
     else
@@ -84,7 +85,7 @@ exports.rekapPerPertemuan = function(req, res) {
                 .filter({ kode_matkul: kodeMatkul, day:day })
                 .value()
 
-    if(row){
+    if(result){
         response.ok(result, res)
     }
     else
@@ -95,20 +96,21 @@ exports.rekapPerPertemuan = function(req, res) {
 
 //rekap mhs per kuliah
 exports.rekapMhsPerKuliah = function(req, res) {
-    var kodeMatkul = parseInt(req.params.kodeMatkul);
+    var kode_matkul = parseInt(req.params.kodeMatkul);
     var nrp = parseInt(req.params.nrp);
     var final = []
 
     var read = db.read()
     var row = db.get('participants')
-                .filter({ nrp: nrp, kode_matkul: kode_matkul })
+                .filter({ kode_matkul: kode_matkul })
+                .filter({ nrp: nrp })
                 .value()
-
+    
     if(row){
         row.forEach(function(idx) {
             var result = db.get('meetings')
-                .filter({ kode_matkul: idx.kode_matkul })
-                .value()
+                            .filter({ kode_matkul: idx.kode_matkul })
+                            .value()
             final.push(result)
         })
         response.ok(final, res)
@@ -123,20 +125,23 @@ exports.rekapMhsPerKuliah = function(req, res) {
 exports.rekapMhsPerSemester = function(req, res) {
     var semester = parseInt(req.params.semester);
     var nrp = parseInt(req.params.nrp);
+    var result = []
     var final = []
 
     var read = db.read()
-    var row = db.get('matakuls')
-                .filter({ smester: semester })
+    var row = db.get('matkuls')
+                .filter({ semester: semester })
                 .value()
+
+    console.log(row)
 
     if(row){
         row.forEach(function(idx) {
-            var result = db.get('participant')
-                .filter({ kode_matkul: idx.kode_matkul, nrp: nrp })
-                .value()
+            result.push(db.get('participants')
+                            .filter({ kode_matkul: idx.kode_matkul, nrp: nrp })
+                            .value())
         })
-        
+
         if(result){
             result.forEach(function(idx) {
                 var results = db.get('meetings')
@@ -204,7 +209,7 @@ exports.tambahPeserta = function(req, res) {
 };
 
 exports.tambahMatkul = function(req, res) {
-    var kodeMatkul = req.body.kodeMatkul;
+    var kodeMatkul = parseInt(req.body.kodeMatkul);
     var name = req.body.name;
     var kelas = req.body.kelas;
     var semester = req.body.semester;
@@ -224,9 +229,8 @@ exports.tambahMatkul = function(req, res) {
         response.err('Matkul sudah ada bro', res);
 };
 
-// belum
 exports.tambahJadwal = function(req, res) {
-    var kodeMatkul = req.body.kodeMatkul;
+    var kodeMatkul = parseInt(req.body.kodeMatkul);
     var day = req.body.day;
     var ruang = req.body.ruang;
     var masuk = req.body.masuk;

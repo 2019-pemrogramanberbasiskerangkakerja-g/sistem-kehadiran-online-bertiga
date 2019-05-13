@@ -24,8 +24,8 @@ module.exports = function(app) {
     app.route('/tambahpeserta/:kodeMatkul/:nrp')
         .post(FbpApi.tambahPeserta);
 
-    // app.route('/tambahmatkul')
-    //     .post(FbpApi.tambahMatkul);
+    app.route('/tambahmatkul')
+        .post(FbpApi.tambahMatkul);
     //
     // app.route('/tambahjadwal')
     //     .post(FbpApi.tambahJadwal);

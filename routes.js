@@ -18,8 +18,8 @@ module.exports = function(app) {
     // app.route('/rekapmahasiswa/:nrp/:semester')
     //     .get(FbpApi.rekapMhsPerSemester);
     //
-    // app.route('/tambahmahasiswa')
-    //     .post(FbpApi.tambahMahasiswa);
+    app.route('/tambahmahasiswa')
+        .post(FbpApi.tambahMahasiswa);
     //
     // app.route('/tambahpeserta/:kodeMatkul/:nrp')
     //     .post(FbpApi.tambahPeserta);

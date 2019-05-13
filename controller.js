@@ -24,3 +24,22 @@ exports.absen = function(req, res) {
         });
     });
 };
+
+exports.tambahMahasiswa = function(req, res) {
+    //console.log(req)
+    var nrp = req.body.nrp;
+    var name = req.body.name;
+    var password = req.body.password;
+
+    var query = "SELECT * FROM mahasiswas WHERE nrp="+nrp;
+    con.query(query, function (err, result, fields) {
+        if(result.length > 0) response.err('Mahasiswa sudah ada bro');
+        else{
+            var query = "INSERT INTO mahasiswas(nrp, name, password) VALUES("+nrp+", "+name+", "+password+")";
+            con.query(query, function (err, result, fields) {
+                if(err) response.err('Maaf, terjadi error');
+                response.ok(result);
+            });
+        }
+    });
+};

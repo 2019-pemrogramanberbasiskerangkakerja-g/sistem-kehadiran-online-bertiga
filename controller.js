@@ -43,3 +43,26 @@ exports.tambahMahasiswa = function(req, res) {
         }
     });
 };
+
+exports.tambahPeserta = function(req, res) {
+    var nrp = req.params.nrp;
+    var kodeMatkul = req.params.kodeMatkul;
+
+    var query = "SELECT * FROM participants WHERE nrp="+nrp+"AND kode_matkul="+kodeMatkul;
+    con.query(query, function (err, result, fields) {
+        if(result.length > 0) response.err('Mahasiswa sudah jadi peserta bro');
+        else{
+            var query = "SELECT * FROM mahasiswas WHERE nrp="+nrp;
+            con.query(query, function (err, result, fields) {
+                if(result.length == 0) response.err('Mahasiswanya jangan ngawur bro');
+                else{
+                    var query = "INSERT INTO participants(nrp, kode_matkul) VALUES("+nrp+", "+kodeMatkul+")";
+                    con.query(query, function (err, result, fields) {
+                        if(err) response.err('Maaf, terjadi error');
+                        response.ok(result);
+                    });
+                }
+            });
+        }
+    });
+};

@@ -20,10 +20,10 @@ module.exports = function(app) {
     //
     app.route('/tambahmahasiswa')
         .post(FbpApi.tambahMahasiswa);
-    //
-    // app.route('/tambahpeserta/:kodeMatkul/:nrp')
-    //     .post(FbpApi.tambahPeserta);
-    //
+
+    app.route('/tambahpeserta/:kodeMatkul/:nrp')
+        .post(FbpApi.tambahPeserta);
+
     // app.route('/tambahmatkul')
     //     .post(FbpApi.tambahMatkul);
     //

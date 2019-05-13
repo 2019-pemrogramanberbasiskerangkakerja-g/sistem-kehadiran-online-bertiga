@@ -14,6 +14,7 @@
 
 #### Usage:
 - `npm install`
+- `node database/create_table.js`
 - `node server.js`
 
 #### Serve:

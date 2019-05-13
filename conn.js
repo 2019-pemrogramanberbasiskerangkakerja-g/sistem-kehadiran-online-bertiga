@@ -1,11 +1,10 @@
-const lowdb = require('lowdb');
-const FileSync = require('lowdb/adapters/FileSync')
+var mysql = require('mysql');
 
-const adapter = new FileSync('db.json')
-const db = lowdb(adapter)
+var con = mysql.createConnection({
+    host     : 'localhost',
+    user     : 'root',
+    password : 'root',
+    database : 'sikeline'
+});
 
-// Set some defaults (required if your JSON file is empty)
-db.defaults({ matkuls: [], participants: [], mahasiswas: [], attendances: [], dosens: [],  meetings:[] })
-    .write()
-
-module.exports = db;
+module.exports = con;

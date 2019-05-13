@@ -27,7 +27,7 @@ con.connect(function(err){
     });
 
     var query = "CREATE TABLE matkuls(" +
-        "kode VARCHAR(20) PRIMARY KEY, name VARCHAR(255), kelas CHAR(1), nip VARCHAR(30), FOREIGN KEY (nip) REFERENCES dosens(nip)" +
+        "kode VARCHAR(20) PRIMARY KEY, name VARCHAR(255), kelas CHAR(1), semester CHAR(1), nip VARCHAR(30), FOREIGN KEY (nip) REFERENCES dosens(nip)" +
     ")";
     con.query(query, function (error, results) {
       if (error) throw error;
@@ -35,7 +35,7 @@ con.connect(function(err){
     });
 
     var query = "CREATE TABLE meetings(" +
-        "id INT AUTO_INCREMENT PRIMARY KEY, kode_matkul VARCHAR(20), day VARCHAR(10), start_date DATETIME, end_date DATETIME,  FOREIGN KEY (kode_matkul) REFERENCES matkuls(kode)" +
+        "id INT AUTO_INCREMENT PRIMARY KEY, kode_matkul VARCHAR(20), ruang VARCHAR(6), day VARCHAR(10), start_date DATETIME, end_date DATETIME,  FOREIGN KEY (kode_matkul) REFERENCES matkuls(kode)" +
     ")";
     con.query(query, function (error, results) {
       if (error) throw error;

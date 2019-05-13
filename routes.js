@@ -26,7 +26,10 @@ module.exports = function(app) {
 
     app.route('/tambahmatkul')
         .post(FbpApi.tambahMatkul);
-    
+
+    app.route('/tambahjadwal')
+        .post(FbpApi.tambahJadwal);
+
     app.route('/tambahdosen')
         .post(FbpApi.tambahDosen);
 };

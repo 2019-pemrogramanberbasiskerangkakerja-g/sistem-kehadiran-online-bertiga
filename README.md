@@ -1,5 +1,5 @@
 ## Framework Based Programming
-### Online attendance system API with Node.js, Express.js, & LowDB
+### Online attendance system API with Node.js, Express.js, & MySql
 
 #### Member:
 - Nirmala - 05111540007003
@@ -17,41 +17,64 @@
 - `node database/create_table.js`
 - `node server.js`
 
-#### Serve:
+### Database Schema:
+  ![Database](IMG/Database.PNG)
+  <br>
+
+#### API and Example (Using Postman):
 - absen
-    - POST /absen/RUANG/NRP
+    - POST /absen/:RUANG/:NRP
 
-
+    ![absen](IMG/absen.PNG)
+    <br>
+ 
 - rekap kuliah per semester
-    - GET /rekap/IDMATAKULIAH
+    - GET /rekap/:IDMATAKULIAH
 
+    ![rekapsem](IMG/rekapsem.PNG)
+    <br>
 
 - rekap kuliah per pertemuan
-    - GET /rekap/IDMATAKULIAH/PERTEMUANKE
+    - GET /rekap/:IDMATAKULIAH/:PERTEMUANKE
 
+    ![rekappertem](IMG/rekappertem.PNG)
+    <br>
 
 - rekap per mahasiswa per kuliah
-    - GET /rekapmahasiswa/NRP/IDMATAKULIAH
-
+    - GET /rekapmahasiswa/:NRP/:IDMATAKULIAH
+    
+    ![rekapmhs](IMG/rekapmhs.PNG)
+    <br>
 
 - rekap per mahasiswa per semester
-    - GET /rekapmahasiswa/NRP/IDSEMESTER
+    - GET /rekapmahasiswa/:NRP/:IDSEMESTER
 
+    ![rekapmhssem](IMG/rekapmhssem.PNG)
+    <br>
 
 - tambah user mhs baru
     - POST /tambahmahasiswa
-    - sent via body: nrp, nama, password
+    - sent via body: nrp, name, password
 
+    ![tambahmahasiswa](IMG/tambahmahasiswa.PNG)
+    <br>
 
 - tambah user mhs ke mata kuliah
-    - POST /tambahpeserta/IDMATAKULIAH/NRP
+    - POST /tambahpeserta/:IDMATAKULIAH/:NRP
 
+    ![tambahpeserta](IMG/tambahpeserta.PNG)
+    <br>
 
 - tambah mata kuliah baru
     - POST /tambahmatkul
-    - sent via body: id mata kuliah, nama matakuliah, kelas
+    - sent via body: kodeMatkul, name, kelas, semester
 
+    ![tambahmatkul](IMG/tambahmatkul.PNG)
+    <br>
 
 - tambah jadwal pertemuan untuk kuliah
     - POST /tambahjadwal
-    - sent via body: id mata kuliah, pertemuan ke, ruang, jam masuk, jam selesai
+    - sent via body: kodeMatkul, pertemuan, ruang, jam masuk, jam selesai
+    
+    ![tambahjadwal](IMG/tambahjadwal.PNG)
+    <br>

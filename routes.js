@@ -15,7 +15,7 @@ module.exports = function(app) {
     app.route('/rekapmahasiswa/:nrp/:kodeMatkul')
         .get(FbpApi.rekapMhsPerKuliah);
     
-    app.route('/rekapmahasiswa/:nrp/:semester')
+    app.route('/rekapmahasiswasem/:nrp/:semester')
         .get(FbpApi.rekapMhsPerSemester);
     
     app.route('/tambahmahasiswa')

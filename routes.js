@@ -35,6 +35,9 @@ module.exports = function(app) {
         .post(FbpApi.tambahDosen);
 
     // view
-    app.route('/tambahpeserta')
+    app.route('/')
+        .get(FbpView.index)
+
+    app.route('/tambahmahasiswa')
         .get(FbpView.tambahMahasiswa)
 };

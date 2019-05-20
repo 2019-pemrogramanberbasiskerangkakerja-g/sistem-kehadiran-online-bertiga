@@ -35,10 +35,14 @@ sqrl.definePartial("navbar", `
               </a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="/">Services</a>
+              <a class="nav-link" href="/tambahmatkul">
+                Tambah Matkul
+              </a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="#">Contact</a>
+              <a class="nav-link" href="/tambahjadwal">
+                Tambah Jadwal
+              </a>
             </li>
           </ul>
         </div>
@@ -60,7 +64,7 @@ exports.tambahMahasiswa = function(req, res) {
 }
 
 exports.tambahMahasiswaPost = function(req, res) {
-    request.post('http://8500ffca.ngrok.io/tambahmahasiswa', {
+    request.post('http://2d01b192.ngrok.io/tambahmahasiswa', {
         json: {
             nrp: req.body.nrp,
             nama: req.body.nama,
@@ -71,9 +75,11 @@ exports.tambahMahasiswaPost = function(req, res) {
             console.error(error)
             return
         }
+        console.log(response.body.status)
 
         res.render('tambah_mhs', {
-            response: JSON.parse(response)
+            status: response.body.status,
+            pesan: response.body.pesan
         });
     });
 }
@@ -83,7 +89,7 @@ exports.tambahPeserta = function(req, res) {
 }
 
 exports.tambahPesertaPost = function(req, res) {
-    request.post('http://8500ffca.ngrok.io/tambahpeserta', {
+    request.post('http://2d01b192.ngrok.io/tambahpeserta', {
         json: {
             nrp: req.body.nrp,
             matakuliah_id: req.body.matakuliah_id,
@@ -95,7 +101,8 @@ exports.tambahPesertaPost = function(req, res) {
         }
 
         res.render('tambah_peserta', {
-            response: JSON.parse(response)
+            status: response.body.status,
+            pesan: response.body.pesan,
         });
     });
 }
@@ -105,7 +112,7 @@ exports.tambahMatkul = function(req, res) {
 }
 
 exports.tambahMatkulPost = function(req, res) {
-    request.post('http://8500ffca.ngrok.io/tambahmatkul', {
+    request.post('http://2d01b192.ngrok.io/tambahmatkul', {
         json: {
             nama: req.body.nama,
             semester: req.body.semester,
@@ -118,7 +125,8 @@ exports.tambahMatkulPost = function(req, res) {
         }
 
         res.render('tambah_matkul', {
-            response: JSON.parse(response)
+            status: response.body.status,
+            pesan: response.body.pesan
         });
     });
 }
@@ -128,7 +136,7 @@ exports.tambahJadwal = function(req, res) {
 }
 
 exports.tambahJadwalPost = function(req, res) {
-    request.post('http://8500ffca.ngrok.io/tambahjadwal', {
+    request.post('http://2d01b192.ngrok.io/tambahjadwal', {
         json: {
             matakuliah_id: req.body.matakuliah_id,
             pertemuan: req.body.pertemuan,
@@ -143,7 +151,8 @@ exports.tambahJadwalPost = function(req, res) {
         }
 
         res.render('tambah_jadwal', {
-            response: JSON.parse(response)
+            status: response.body.status,
+            pesan: response.body.pesan
         });
     });
 }

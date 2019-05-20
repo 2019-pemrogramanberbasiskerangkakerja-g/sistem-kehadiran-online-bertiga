@@ -10,20 +10,21 @@
 {{include(navbar)/}}
 
 <!-- Content here -->
-    {{ if(typeof response == 'undefined') }}
-    <!-- Do nothing -->
-    {{ #else }}
-        {{ if(response.status == 'gagal') }}
+    {{ if(status) }}
         <div class="alert alert-danger">
-            {{ response.pesan }}
+            {{ pesan }}
         </div>
+    {{ #else }}
+        {{ if(status == 'sukses') }}
+            <div class="alert alert-success">
+                {{ pesan }}
+            </div>
         {{ #else }}
-        <div class="alert alert-success">
-            {{ response.pesan }}
-        </div>
+            <div class="alert alert-danger">
+                {{ pesan }}
+            </div>
         {{ /if }}
     {{ /if }}
-
     <div class="card">
         <div class="card-body">
             <div class="col-md-6 offset-md-3">

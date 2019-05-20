@@ -25,22 +25,22 @@ sqrl.definePartial("navbar", `
         <div class="collapse navbar-collapse" id="navbarResponsive">
           <ul class="navbar-nav ml-auto">
             <li class="nav-item">
-              <a class="nav-link" href="/tambahmahasiswa">
+              <a class="nav-link" href="/vtambahmahasiswa">
                 Tambah Mahasiswa
               </a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="/tambahpeserta">
+              <a class="nav-link" href="/vtambahpeserta">
                 Tambah Peserta
               </a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="/tambahmatkul">
+              <a class="nav-link" href="/vtambahmatkul">
                 Tambah Matkul
               </a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="/tambahjadwal">
+              <a class="nav-link" href="/vtambahjadwal">
                 Tambah Jadwal
               </a>
             </li>
@@ -92,7 +92,7 @@ exports.tambahPesertaPost = function(req, res) {
     request.post('http://2d01b192.ngrok.io/tambahpeserta', {
         json: {
             nrp: req.body.nrp,
-            matakuliah_id: req.body.matakuliah_id,
+            id_matkul: req.body.matakuliah_id,
         }
     }, (error, response, body) => {
         if(error) {

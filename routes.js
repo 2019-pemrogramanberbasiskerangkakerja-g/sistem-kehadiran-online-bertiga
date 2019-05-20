@@ -38,21 +38,27 @@ module.exports = function(app) {
     app.route('/')
         .get(FbpView.index)
 
-    app.route('/tambahmahasiswa')
+    app.route('/vtambahmahasiswa')
         .get(FbpView.tambahMahasiswa)
 
-    app.route('/tambahmahasiswaPost')
+    app.route('/vtambahmahasiswaPost')
         .post(FbpView.tambahMahasiswaPost)
 
-    app.route('/tambahpeserta')
+    app.route('/vtambahpeserta')
         .get(FbpView.tambahPeserta)
 
-    app.route('/tambahpesertaPost')
+    app.route('/vtambahpesertaPost')
         .post(FbpView.tambahPesertaPost)
 
-    app.route('/tambahmatkul')
+    app.route('/vtambahmatkul')
         .get(FbpView.tambahMatkul)
 
-    app.route('/tambahmatkulPost')
+    app.route('/vtambahmatkulPost')
         .post(FbpView.tambahMatkulPost)
+
+    app.route('/vtambahjadwal')
+        .get(FbpView.tambahJadwal)
+
+    app.route('/vtambahjadwalPost')
+        .post(FbpView.tambahJadwalPost)
 };

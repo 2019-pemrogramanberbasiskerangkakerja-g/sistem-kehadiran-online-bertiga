@@ -10,13 +10,9 @@
 {{include(navbar)/}}
 
 <!-- Content here -->
-    {{ if(status) }}
-        <div class="alert alert-danger">
-            {{ pesan }}
-        </div>
-    {{ #else }}
-        {{ if(status == 'sukses') }}
-            <div class="alert alert-success">
+    {{ if(options.status) }}
+        {{ if(options.status == 'sukses') }}
+            <div class="alert alert-success text-center">
                 {{ pesan }}
             </div>
         {{ #else }}
@@ -25,10 +21,11 @@
             </div>
         {{ /if }}
     {{ /if }}
+
     <div class="card">
         <div class="card-body">
             <div class="col-md-6 offset-md-3">
-                <form action="/tambahmahasiswaPost" method="post">
+                <form action="/vtambahmahasiswaPost" method="post">
                     <div class="form-group">
                         <label for="nrp">NRP</label>
                         <input type="text" name="nrp" class="form-control" required>

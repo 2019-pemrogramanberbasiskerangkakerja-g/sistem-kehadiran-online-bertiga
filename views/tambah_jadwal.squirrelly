@@ -10,20 +10,22 @@
 {{include(navbar)/}}
 
 <!-- Content here -->
-    {{ if(response.status == 'gagal') }}
-    <div class="alert alert-danger">
-        {{ response.pesan }}
-    </div>
-    {{ else }}
-    <div class="alert alert-success">
-        {{ response.pesan }}
-    </div>
+    {{ if(options.status) }}
+        {{ if(options.status == 'sukses') }}
+            <div class="alert alert-success text-center">
+                {{ pesan }}
+            </div>
+        {{ #else }}
+            <div class="alert alert-danger">
+                {{ pesan }}
+            </div>
+        {{ /if }}
     {{ /if }}
 
     <div class="card">
         <div class="card-body">
             <div class="col-md-6 offset-md-3">
-                <form action="/tambahmahasiswaPost" method="post">
+                <form action="/vtambahjadwalPost" method="post">
                     <div class="form-group">
                         <label for="matakuliah_id">ID Matkul</label>
                         <input type="text" name="matakuliah_id" class="form-control" required>

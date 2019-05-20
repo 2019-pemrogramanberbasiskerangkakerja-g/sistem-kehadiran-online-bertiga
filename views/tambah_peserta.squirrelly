@@ -10,24 +10,22 @@
 {{include(navbar)/}}
 
 <!-- Content here -->
-    {{ if(typeof response == 'undefined') }}
-    <!-- Do nothing -->
-    {{ #else }}
-        {{ if(response.status == 'gagal') }}
-        <div class="alert alert-danger">
-            {{ response.pesan }}
-        </div>
+    {{ if(options.status) }}
+        {{ if(options.status == 'sukses') }}
+            <div class="alert alert-success text-center">
+                {{ pesan }}
+            </div>
         {{ #else }}
-        <div class="alert alert-success">
-            {{ response.pesan }}
-        </div>
+            <div class="alert alert-danger">
+                {{ pesan }}
+            </div>
         {{ /if }}
     {{ /if }}
 
     <div class="card">
         <div class="card-body">
             <div class="col-md-6 offset-md-3">
-                <form action="/tambahpesertaPost" method="post">
+                <form action="/vtambahpesertaPost" method="post">
                     <div class="form-group">
                         <label for="nrp">NRP</label>
                         <input type="text" name="nrp" class="form-control" required>

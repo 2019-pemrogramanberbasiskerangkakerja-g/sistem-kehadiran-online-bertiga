@@ -40,4 +40,19 @@ module.exports = function(app) {
 
     app.route('/tambahmahasiswa')
         .get(FbpView.tambahMahasiswa)
+
+    app.route('/tambahmahasiswaPost')
+        .post(FbpView.tambahMahasiswaPost)
+
+    app.route('/tambahpeserta')
+        .get(FbpView.tambahPeserta)
+
+    app.route('/tambahpesertaPost')
+        .post(FbpView.tambahPesertaPost)
+
+    app.route('/tambahmatkul')
+        .get(FbpView.tambahMatkul)
+
+    app.route('/tambahmatkulPost')
+        .post(FbpView.tambahMatkulPost)
 };

@@ -27,18 +27,14 @@
     <div class="card">
         <div class="card-body">
             <div class="col-md-6 offset-md-3">
-                <form action="/tambahmahasiswaPost" method="post">
+                <form action="/tambahpesertaPost" method="post">
                     <div class="form-group">
                         <label for="nrp">NRP</label>
                         <input type="text" name="nrp" class="form-control" required>
                     </div>
                     <div class="form-group">
-                        <label for="nama">Nama</label>
-                        <input type="text" name="nama" class="form-control" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="password">Password</label>
-                        <input type="password" name="password" class="form-control" required>
+                        <label for="matakuliah_id">Mata Kuliah ID</label>
+                        <input type="text" name="matakuliah_id" class="form-control" required>
                     </div>
                     <div class="form-group">
                         <input type="submit" class="btn btn-primary" value="Submit">

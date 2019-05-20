@@ -1,7 +1,8 @@
 'use strict';
 
 var con = require('./conn');
-var sqrl = require('squirrelly')
+var sqrl = require('squirrelly');
+const request = require('request');
 
 sqrl.definePartial("head", `
   <meta charset="utf-8">
@@ -23,16 +24,18 @@ sqrl.definePartial("navbar", `
         </button>
         <div class="collapse navbar-collapse" id="navbarResponsive">
           <ul class="navbar-nav ml-auto">
-            <li class="nav-item active">
-              <a class="nav-link" href="/tambahmahasiswa">Tambah Mahasiswa
-                <span class="sr-only">(current)</span>
+            <li class="nav-item">
+              <a class="nav-link" href="/tambahmahasiswa">
+                Tambah Mahasiswa
               </a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="#">About</a>
+              <a class="nav-link" href="/tambahpeserta">
+                Tambah Peserta
+              </a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="#">Services</a>
+              <a class="nav-link" href="/">Services</a>
             </li>
             <li class="nav-item">
               <a class="nav-link" href="#">Contact</a>
@@ -49,53 +52,98 @@ sqrl.definePartial("foot", `
 `)
 
 exports.index = function(req, res) {
-    res.render('index', {
-
-    })
+    res.render('index')
 }
 
 exports.tambahMahasiswa = function(req, res) {
-    res.render('tambah_mhs', {
-
-    })
+    res.render('tambah_mhs')
 }
 
-exports.absen = function(req, res) {
+exports.tambahMahasiswaPost = function(req, res) {
+    request.post('http://8500ffca.ngrok.io/tambahmahasiswa', {
+        json: {
+            nrp: req.body.nrp,
+            nama: req.body.nama,
+            password: req.body.password
+        }
+    }, (error, response, body) => {
+        if(error) {
+            console.error(error)
+            return
+        }
 
+        res.render('tambah_mhs', {
+            response: JSON.parse(response)
+        });
+    });
 }
 
 exports.tambahPeserta = function(req, res) {
+    res.render('tambah_peserta');
+}
 
+exports.tambahPesertaPost = function(req, res) {
+    request.post('http://8500ffca.ngrok.io/tambahpeserta', {
+        json: {
+            nrp: req.body.nrp,
+            matakuliah_id: req.body.matakuliah_id,
+        }
+    }, (error, response, body) => {
+        if(error) {
+            console.error(error)
+            return
+        }
+
+        res.render('tambah_peserta', {
+            response: JSON.parse(response)
+        });
+    });
 }
 
 exports.tambahMatkul = function(req, res) {
+    res.render('tambah_matkul');
+}
 
+exports.tambahMatkulPost = function(req, res) {
+    request.post('http://8500ffca.ngrok.io/tambahmatkul', {
+        json: {
+            nama: req.body.nama,
+            semester: req.body.semester,
+            kelas: req.body.kelas,
+        }
+    }, (error, response, body) => {
+        if(error) {
+            console.error(error)
+            return
+        }
+
+        res.render('tambah_matkul', {
+            response: JSON.parse(response)
+        });
+    });
 }
 
 exports.tambahJadwal = function(req, res) {
-
+    res.render('tambah_jadwal');
 }
 
-exports.tambahDosen = function(req,res) {
+exports.tambahJadwalPost = function(req, res) {
+    request.post('http://8500ffca.ngrok.io/tambahjadwal', {
+        json: {
+            matakuliah_id: req.body.matakuliah_id,
+            pertemuan: req.body.pertemuan,
+            ruangan: req.body.ruangan,
+            jam_mulai: req.body.jam_mulai,
+            jam_selesai: req.body.jam_selesai,
+        }
+    }, (error, response, body) => {
+        if(error) {
+            console.error(error)
+            return
+        }
 
+        res.render('tambah_jadwal', {
+            response: JSON.parse(response)
+        });
+    });
 }
-
-//rekap kuliah per semester
-exports.rekapPerSemester = function(req, res) {
-
-};
-
-//rekap kuliah per pertemuan
-exports.rekapPerPertemuan = function(req, res) {
-
-};
-
-//rekap mhs per kuliah
-exports.rekapMhsPerKuliah = function(req, res) {
-
-};
-
-//rekap mhs per semester
-exports.rekapMhsPerSemester = function(req, res) {
-
-};

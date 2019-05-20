@@ -10,6 +10,17 @@
 {{include(navbar)/}}
 
 <!-- Content here -->
+    <div class="card text-center">
+        <div class="card-header">
+            <h2>Sistem Kehadiran Online</h2>
+        </div>
+        <div class="card-body">
+            <p>Ini body card</p>
+        </div>
+        <div class="card-footer">
+            <p>Ini card footer</p>
+        </div>
+    </div>
 
 {{include(foot)/}}
 

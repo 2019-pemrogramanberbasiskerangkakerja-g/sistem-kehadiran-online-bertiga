@@ -65,24 +65,30 @@ module.exports = function(app) {
     app.route('/vrekapsemester')
         .get(FbpView.rekapsemester)
     
-    app.route('/vrekapsemesterget/:id_matkul')
+    app.route('/vrekapsemesterget')
         .get(FbpView.rekapsemesterGet)
     
     app.route('/vrekappertemuan')
         .get(FbpView.rekappertemuan)
 
-    app.route('/vrekappertemuanget/:id_matkul/:pertemuanke')
+    app.route('/vrekappertemuanget')
         .get(FbpView.rekappertemuanGet)
     
     app.route('/vrekapmahasiswa')
         .get(FbpView.rekapmhs)
 
-    app.route('/vrekapmahasiswaget/:nrp/:id_matkul')
+    app.route('/vrekapmahasiswaget')
         .get(FbpView.rekapmhsGet)
 
     app.route('/vrekapmahasiswasem')
         .get(FbpView.rekapmhssem)
 
-    app.route('/vrekapmahasiswasemget/:nrp/:idsemester')
+    app.route('/vrekapmahasiswasemget')
         .get(FbpView.rekapmhssemGet)
+
+    app.route('/vabsenPost')
+        .post(FbpView.absenPost)
+
+    app.route('/vabsen')
+        .get(FbpView.absen)
 };

@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+  {{include(head)/}}
+
+</head>
+<body>
+
+{{include(navbar)/}}
+
+<!-- Content here -->
+    <div class="card">
+        <div class="card-body">
+            <div class="col-md-6 offset-md-3">
+                <form action="/vrekappertemuanget" method="get">
+                    <div class="form-group">
+                        <label for="id_matkul">ID Mata Kuliah</label>
+                        <input type="text" name="id_matkul" class="form-control" required>
+                    </div>
+					<div class="form-group">
+                        <label for="pertemuanke">Pertemuan</label>
+                        <input type="text" name="pertemuanke" class="form-control" required>
+                    </div>
+					<div class="form-group">
+                        <input type="submit" class="btn btn-primary" value="Submit">
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+{{include(foot)/}}

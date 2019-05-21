@@ -346,6 +346,31 @@ sqrl.definePartial("navbar", `
                 Tambah Jadwal
               </a>
             </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/vrekapsemester">
+                Rekap Semester
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/vrekappertemuan">
+                Rekap Pertemuan
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/vrekapmahasiswa">
+                Rekap Matakuliah Mahasiswa
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/vrekapmahasiswasem">
+                Rekap Semester Mahasiswa
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/vabsen">
+                Absen
+              </a>
+            </li>
           </ul>
         </div>
       </div>
@@ -464,19 +489,22 @@ exports.rekapsemester = function(req, res) {
 }
 
 exports.rekapsemesterGet = function(req, res) {
-    request.get('http://1729da82.ngrok.io/rekap/'+req.params.id_matkul, (error, response, body) => {
+
+    //console.log(req.query)
+
+    request.get('http://1729da82.ngrok.io/rekap/'+req.query.id_matkul, (error, response, body) => {
         if(error) {
             console.error(error)
             return
         }
 
         console.log(body)
-        //var result = []
+        response = JSON.parse(response.body);
 
         res.render('rekapsemester', {
-            status: response.body.status,
-            pesan: response.body.pesan,
-            isi_data: response.body.isi_data
+            status: response.status,
+            pesan: response.pesan,
+            isi_data: response.isi_data
         });
     });
 }
@@ -486,7 +514,8 @@ exports.rekappertemuan = function(req, res) {
 }
 
 exports.rekappertemuanGet = function(req, res) {
-    request.get('http://1729da82.ngrok.io/rekap/'+req.params.id_matkul+'/'+req.params.pertemuanke, {
+
+    request.get('http://1729da82.ngrok.io/rekap/'+req.query.id_matkul+'/'+req.query.pertemuanke, {
     }, (error, response, body) => {
         if(error) {
             console.error(error)
@@ -495,10 +524,12 @@ exports.rekappertemuanGet = function(req, res) {
 
         console.log(body)
 
+        response = JSON.parse(response.body);
+
         res.render('rekappertemuan', {
-            status: response.body.status,
-            pesan: response.body.pesan,
-            isi_data : response.body.isi_data
+            status: response.status,
+            pesan: response.pesan,
+            isi_data: response.isi_data
         });
     });
 }
@@ -508,19 +539,21 @@ exports.rekapmhs = function(req, res) {
 }
 
 exports.rekapmhsGet = function(req, res) {
-    request.get('http://1729da82.ngrok.io/rekapmahasiswa/'+req.params.nrp+'/'+req.params.id_matkul, {
+    request.get('http://1729da82.ngrok.io/rekapmahasiswa/'+req.query.nrp+'/'+req.query.id_matkul, {
     }, (error, response, body) => {
         if(error) {
             console.error(error)
             return
         }
 
-        //console.log(response.body)
+        console.log(body)
+
+        response = JSON.parse(response.body);
 
         res.render('rekapmhs', {
-            status: response.body.status,
-            pesan: response.body.pesan,
-            isi_data : response.body.isi_data
+            status: response.status,
+            pesan: response.pesan,
+            isi_data: response.isi_data
         });
     });
 }
@@ -530,19 +563,44 @@ exports.rekapmhssem = function(req, res) {
 }
 
 exports.rekapmhssemGet = function(req, res) {
-    request.get('http://1729da82.ngrok.io/rekapmahasiswasemester/'+req.params.nrp+'/'+req.params.idsemester, {
+    request.get('http://1729da82.ngrok.io/rekapmahasiswasemester/'+req.query.nrp+'/'+req.query.idsemester, {
     }, (error, response, body) => {
         if(error) {
             console.error(error)
             return
         }
 
-        //console.log(response.body)
+        console.log(body)
+
+        response = JSON.parse(response.body);
 
         res.render('rekapmhssem', {
+            status: response.status,
+            pesan: response.pesan,
+            isi_data: response.isi_data
+        });
+    });
+}
+
+exports.absen = function(req, res) {
+    res.render('absen');
+}
+
+exports.absenPost = function(req, res) {
+    request.post('http://1729da82.ngrok.io/absen', {
+        json: {
+            nrp: req.body.nrp,
+            pertemuan: req.body.pertemuan,
+        }
+    }, (error, response, body) => {
+        if(error) {
+            console.error(error)
+            return
+        }
+
+        res.render('absen', {
             status: response.body.status,
-            pesan: response.body.pesan,
-            isi_data : response.body.isi_data
+            pesan: response.body.pesan
         });
     });
 }

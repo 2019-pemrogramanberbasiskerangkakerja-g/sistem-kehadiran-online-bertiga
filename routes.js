@@ -61,4 +61,28 @@ module.exports = function(app) {
 
     app.route('/vtambahjadwalPost')
         .post(FbpView.tambahJadwalPost)
+    
+    app.route('/vrekapsemester')
+        .get(FbpView.rekapsemester)
+    
+    app.route('/vrekapsemesterget/:id_matkul')
+        .get(FbpView.rekapsemesterGet)
+    
+    app.route('/vrekappertemuan')
+        .get(FbpView.rekappertemuan)
+
+    app.route('/vrekappertemuanget/:id_matkul/:pertemuanke')
+        .get(FbpView.rekappertemuanGet)
+    
+    app.route('/vrekapmahasiswa')
+        .get(FbpView.rekapmhs)
+
+    app.route('/vrekapmahasiswaget/:nrp/:id_matkul')
+        .get(FbpView.rekapmhsGet)
+
+    app.route('/vrekapmahasiswasem')
+        .get(FbpView.rekapmhssem)
+
+    app.route('/vrekapmahasiswasemget/:nrp/:idsemester')
+        .get(FbpView.rekapmhssemGet)
 };

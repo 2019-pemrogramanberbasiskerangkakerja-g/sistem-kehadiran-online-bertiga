@@ -20,7 +20,7 @@ sqrl.definePartial("head", `
 
         @font-face {
         font-family: OpenSans-Regular;
-        src: url('../fonts/OpenSans/OpenSans-Regular.ttf'); 
+        src: url('../fonts/OpenSans/OpenSans-Regular.ttf');
         }
 
 
@@ -28,8 +28,8 @@ sqrl.definePartial("head", `
         /*//////////////////////////////////////////////////////////////////
         [ RESTYLE TAG ]*/
         * {
-            margin: 0px; 
-            padding: 0px; 
+            margin: 0px;
+            padding: 0px;
             box-sizing: border-box;
         }
 
@@ -391,7 +391,7 @@ exports.tambahMahasiswa = function(req, res) {
 }
 
 exports.tambahMahasiswaPost = function(req, res) {
-    request.post('http://1729da82.ngrok.io/tambahmahasiswa', {
+    request.post('http://466b262e.ngrok.io/tambahmahasiswa', {
         json: {
             nrp: req.body.nrp,
             nama: req.body.nama,
@@ -416,7 +416,7 @@ exports.tambahPeserta = function(req, res) {
 }
 
 exports.tambahPesertaPost = function(req, res) {
-    request.post('http://1729da82.ngrok.io/tambahpeserta', {
+    request.post('http://466b262e.ngrok.io/tambahpeserta', {
         json: {
             nrp: req.body.nrp,
             id_matkul: req.body.matakuliah_id,
@@ -439,7 +439,7 @@ exports.tambahMatkul = function(req, res) {
 }
 
 exports.tambahMatkulPost = function(req, res) {
-    request.post('http://1729da82.ngrok.io/tambahmatkul', {
+    request.post('http://466b262e.ngrok.io/tambahmatkul', {
         json: {
             nama: req.body.nama,
             semester: req.body.semester,
@@ -463,7 +463,7 @@ exports.tambahJadwal = function(req, res) {
 }
 
 exports.tambahJadwalPost = function(req, res) {
-    request.post('http://1729da82.ngrok.io/tambahjadwal', {
+    request.post('http://466b262e.ngrok.io/tambahjadwal', {
         json: {
             matakuliah_id: req.body.matakuliah_id,
             pertemuan: req.body.pertemuan,
@@ -492,7 +492,7 @@ exports.rekapsemesterGet = function(req, res) {
 
     //console.log(req.query)
 
-    request.get('http://1729da82.ngrok.io/rekap/'+req.query.id_matkul, (error, response, body) => {
+    request.get('http://466b262e.ngrok.io/rekap/'+req.query.id_matkul, (error, response, body) => {
         if(error) {
             console.error(error)
             return
@@ -515,7 +515,7 @@ exports.rekappertemuan = function(req, res) {
 
 exports.rekappertemuanGet = function(req, res) {
 
-    request.get('http://1729da82.ngrok.io/rekap/'+req.query.id_matkul+'/'+req.query.pertemuanke, {
+    request.get('http://466b262e.ngrok.io/rekap/'+req.query.id_matkul+'/'+req.query.pertemuanke, {
     }, (error, response, body) => {
         if(error) {
             console.error(error)
@@ -539,7 +539,7 @@ exports.rekapmhs = function(req, res) {
 }
 
 exports.rekapmhsGet = function(req, res) {
-    request.get('http://1729da82.ngrok.io/rekapmahasiswa/'+req.query.nrp+'/'+req.query.id_matkul, {
+    request.get('http://466b262e.ngrok.io/rekapmahasiswa/'+req.query.nrp+'/'+req.query.id_matkul, {
     }, (error, response, body) => {
         if(error) {
             console.error(error)
@@ -563,7 +563,7 @@ exports.rekapmhssem = function(req, res) {
 }
 
 exports.rekapmhssemGet = function(req, res) {
-    request.get('http://1729da82.ngrok.io/rekapmahasiswasemester/'+req.query.nrp+'/'+req.query.idsemester, {
+    request.get('http://466b262e.ngrok.io/rekapmahasiswasemester/'+req.query.nrp+'/'+req.query.idsemester, {
     }, (error, response, body) => {
         if(error) {
             console.error(error)
@@ -587,7 +587,7 @@ exports.absen = function(req, res) {
 }
 
 exports.absenPost = function(req, res) {
-    request.post('http://1729da82.ngrok.io/absen', {
+    request.post('http://466b262e.ngrok.io/absen', {
         json: {
             nrp: req.body.nrp,
             pertemuan: req.body.pertemuan,

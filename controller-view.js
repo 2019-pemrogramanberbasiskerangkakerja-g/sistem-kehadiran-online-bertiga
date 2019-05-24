@@ -20,7 +20,7 @@ sqrl.definePartial("head", `
 
         @font-face {
         font-family: OpenSans-Regular;
-        src: url('../fonts/OpenSans/OpenSans-Regular.ttf');
+        src: url('../fonts/OpenSans/OpenSans-Regular.ttf'); 
         }
 
 
@@ -28,8 +28,8 @@ sqrl.definePartial("head", `
         /*//////////////////////////////////////////////////////////////////
         [ RESTYLE TAG ]*/
         * {
-            margin: 0px;
-            padding: 0px;
+            margin: 0px; 
+            padding: 0px; 
             box-sizing: border-box;
         }
 
@@ -391,7 +391,7 @@ exports.tambahMahasiswa = function(req, res) {
 }
 
 exports.tambahMahasiswaPost = function(req, res) {
-    request.post('http://466b262e.ngrok.io/tambahmahasiswa', {
+    request.post('http://9884449c.ngrok.io/tambahmahasiswa', {
         json: {
             nrp: req.body.nrp,
             nama: req.body.nama,
@@ -416,10 +416,10 @@ exports.tambahPeserta = function(req, res) {
 }
 
 exports.tambahPesertaPost = function(req, res) {
-    request.post('http://466b262e.ngrok.io/tambahpeserta', {
+    request.post('http://9884449c.ngrok.io/tambahpesertakelas', {
         json: {
             nrp: req.body.nrp,
-            id_matkul: req.body.matakuliah_id,
+            kode_matkul: req.body.kode_matkul,
         }
     }, (error, response, body) => {
         if(error) {
@@ -439,8 +439,9 @@ exports.tambahMatkul = function(req, res) {
 }
 
 exports.tambahMatkulPost = function(req, res) {
-    request.post('http://466b262e.ngrok.io/tambahmatkul', {
+    request.post('http://9884449c.ngrok.io/tambahmatkul', {
         json: {
+            kode_matkul: req.body.kode_matkul,
             nama: req.body.nama,
             semester: req.body.semester,
             kelas: req.body.kelas,
@@ -463,9 +464,9 @@ exports.tambahJadwal = function(req, res) {
 }
 
 exports.tambahJadwalPost = function(req, res) {
-    request.post('http://466b262e.ngrok.io/tambahjadwal', {
+    request.post('http://9884449c.ngrok.io/tambahjadwal', {
         json: {
-            matakuliah_id: req.body.matakuliah_id,
+            kode_matkul: req.body.kode_matkul,
             pertemuan: req.body.pertemuan,
             ruangan: req.body.ruangan,
             jam_mulai: req.body.jam_mulai,
@@ -492,19 +493,24 @@ exports.rekapsemesterGet = function(req, res) {
 
     //console.log(req.query)
 
-    request.get('http://466b262e.ngrok.io/rekap/'+req.query.id_matkul, (error, response, body) => {
+    request.get('http://9884449c.ngrok.io/rekap/'+req.query.id_matkul, (error, response, body) => {
         if(error) {
             console.error(error)
             return
         }
 
-        console.log(body)
+        console.log(response)
         response = JSON.parse(response.body);
+        var result
+        if(response.isi_data)
+            result = response.isi_data
+        else
+            result = []
 
         res.render('rekapsemester', {
             status: response.status,
             pesan: response.pesan,
-            isi_data: response.isi_data
+            isi_data: result
         });
     });
 }
@@ -515,7 +521,7 @@ exports.rekappertemuan = function(req, res) {
 
 exports.rekappertemuanGet = function(req, res) {
 
-    request.get('http://466b262e.ngrok.io/rekap/'+req.query.id_matkul+'/'+req.query.pertemuanke, {
+    request.get('http://9884449c.ngrok.io/rekap/'+req.query.id_matkul+'/'+req.query.pertemuanke, {
     }, (error, response, body) => {
         if(error) {
             console.error(error)
@@ -525,11 +531,16 @@ exports.rekappertemuanGet = function(req, res) {
         console.log(body)
 
         response = JSON.parse(response.body);
+        var result
+        if(response.isi_data)
+            result = response.isi_data
+        else
+            result = []
 
         res.render('rekappertemuan', {
             status: response.status,
             pesan: response.pesan,
-            isi_data: response.isi_data
+            isi_data: result
         });
     });
 }
@@ -539,7 +550,7 @@ exports.rekapmhs = function(req, res) {
 }
 
 exports.rekapmhsGet = function(req, res) {
-    request.get('http://466b262e.ngrok.io/rekapmahasiswa/'+req.query.nrp+'/'+req.query.id_matkul, {
+    request.get('http://9884449c.ngrok.io/rekapmahasiswa/'+req.query.nrp+'/'+req.query.id_matkul, {
     }, (error, response, body) => {
         if(error) {
             console.error(error)
@@ -549,11 +560,16 @@ exports.rekapmhsGet = function(req, res) {
         console.log(body)
 
         response = JSON.parse(response.body);
+        var result
+        if(response.isi_data)
+            result = response.isi_data
+        else
+            result = []
 
         res.render('rekapmhs', {
             status: response.status,
             pesan: response.pesan,
-            isi_data: response.isi_data
+            isi_data: result
         });
     });
 }
@@ -563,7 +579,7 @@ exports.rekapmhssem = function(req, res) {
 }
 
 exports.rekapmhssemGet = function(req, res) {
-    request.get('http://466b262e.ngrok.io/rekapmahasiswasemester/'+req.query.nrp+'/'+req.query.idsemester, {
+    request.get('http://9884449c.ngrok.io/rekapmahasiswasemester/'+req.query.nrp+'/'+req.query.idsemester, {
     }, (error, response, body) => {
         if(error) {
             console.error(error)
@@ -573,11 +589,16 @@ exports.rekapmhssemGet = function(req, res) {
         console.log(body)
 
         response = JSON.parse(response.body);
+        var result
+        if(response.isi_data)
+            result = response.isi_data
+        else
+            result = []
 
         res.render('rekapmhssem', {
             status: response.status,
             pesan: response.pesan,
-            isi_data: response.isi_data
+            isi_data: result
         });
     });
 }
@@ -587,10 +608,10 @@ exports.absen = function(req, res) {
 }
 
 exports.absenPost = function(req, res) {
-    request.post('http://466b262e.ngrok.io/absen', {
+    request.post('http://9884449c.ngrok.io/absen', {
         json: {
             nrp: req.body.nrp,
-            pertemuan: req.body.pertemuan,
+            ruangan: req.body.ruangan,
         }
     }, (error, response, body) => {
         if(error) {

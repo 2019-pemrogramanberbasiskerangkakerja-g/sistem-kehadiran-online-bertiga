@@ -13,7 +13,7 @@
 					<table>
 						<thead>
 							<tr class="table100-head">
-								<th class="column1">Id Matakuliah</th>
+								<th class="column1">Id</th>
 								<th class="column2">NRP</th>
 								<th class="column3">Nama</th>
 							</tr>
@@ -21,7 +21,7 @@
 						<tbody>
 							{{each(options.isi_data)}}
 								<tr>
-									<td class="column1">{{@this.matakuliah_id}}</td>
+									<td class="column1">{{@this.id}}</td>
 									<td class="column2">{{@this.nrp}}</td>
 									<td class="column3">{{@this.nama}}</td>
 								</tr>

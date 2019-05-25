@@ -22,7 +22,7 @@
 							{{each(options.isi_data)}}
 								<tr>
 									<td class="column1">{{@this.mahasiswa_id}}</td>
-									<td class="column2">{{@this.pertemuan}}</td>
+									<td class="column2">{{@this.pertemuan_matakuliah_id}}</td>
 									<td class="column3">{{@this.tanggal_waktu}}</td>
 								</tr>
 							{{/each}}

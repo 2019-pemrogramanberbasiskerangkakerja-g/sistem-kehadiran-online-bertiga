@@ -419,7 +419,7 @@ exports.tambahPesertaPost = function(req, res) {
     request.post('http://d6a64457.ngrok.io//tambahpeserta', {
         json: {
             nrp: req.body.nrp,
-            id_matkul: req.body.matakuliah_id,
+            kode_matkul: req.body.kode_matkul,
         }
     }, (error, response, body) => {
         if(error) {
@@ -441,6 +441,7 @@ exports.tambahMatkul = function(req, res) {
 exports.tambahMatkulPost = function(req, res) {
     request.post('http://d6a64457.ngrok.io//tambahmatkul', {
         json: {
+            kode_matkul: req.body.kode_matkul,
             nama: req.body.nama,
             semester: req.body.semester,
             kelas: req.body.kelas,
@@ -465,7 +466,7 @@ exports.tambahJadwal = function(req, res) {
 exports.tambahJadwalPost = function(req, res) {
     request.post('http://d6a64457.ngrok.io//tambahjadwal', {
         json: {
-            matakuliah_id: req.body.matakuliah_id,
+            kode_matkul: req.body.kode_matkul,
             pertemuan: req.body.pertemuan,
             ruangan: req.body.ruangan,
             jam_mulai: req.body.jam_mulai,
@@ -498,13 +499,18 @@ exports.rekapsemesterGet = function(req, res) {
             return
         }
 
-        console.log(body)
+        console.log(response)
         response = JSON.parse(response.body);
+        var result
+        if(response.isi_data)
+            result = response.isi_data
+        else
+            result = []
 
         res.render('rekapsemester', {
             status: response.status,
             pesan: response.pesan,
-            isi_data: response.isi_data
+            isi_data: result
         });
     });
 }
@@ -525,11 +531,16 @@ exports.rekappertemuanGet = function(req, res) {
         console.log(body)
 
         response = JSON.parse(response.body);
+        var result
+        if(response.isi_data)
+            result = response.isi_data
+        else
+            result = []
 
         res.render('rekappertemuan', {
             status: response.status,
             pesan: response.pesan,
-            isi_data: response.isi_data
+            isi_data: result
         });
     });
 }
@@ -549,11 +560,16 @@ exports.rekapmhsGet = function(req, res) {
         console.log(body)
 
         response = JSON.parse(response.body);
+        var result
+        if(response.isi_data)
+            result = response.isi_data
+        else
+            result = []
 
         res.render('rekapmhs', {
             status: response.status,
             pesan: response.pesan,
-            isi_data: response.isi_data
+            isi_data: result
         });
     });
 }
@@ -573,11 +589,16 @@ exports.rekapmhssemGet = function(req, res) {
         console.log(body)
 
         response = JSON.parse(response.body);
+        var result
+        if(response.isi_data)
+            result = response.isi_data
+        else
+            result = []
 
         res.render('rekapmhssem', {
             status: response.status,
             pesan: response.pesan,
-            isi_data: response.isi_data
+            isi_data: result
         });
     });
 }
@@ -590,7 +611,7 @@ exports.absenPost = function(req, res) {
     request.post('http://d6a64457.ngrok.io//absen', {
         json: {
             nrp: req.body.nrp,
-            pertemuan: req.body.pertemuan,
+            ruangan: req.body.ruangan,
         }
     }, (error, response, body) => {
         if(error) {

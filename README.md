@@ -87,43 +87,44 @@
 
 - Tambah Mahasiswa baru
   - Post /vtambahmahasiswa
-  - body : NRP, Nama, Password
+  - sent via body : NRP, Nama, Password
+  - cek mahasiswa yang telah ditambahkan http://7840b93e.ngrok.io/mahasiswa
   
   ![IMG](https://github.com/2019-pemrogramanberbasiskerangkakerja-g/sistem-kehadiran-online-bertiga/blob/baru/IMG/Screenshot%20(91).png)
   
 - Tambah Mata Kuliah 
   - Post /vtambahmatkul
-  - body : Mata Kuliah ID, Nama, Semester, Kelas
+  - sent via body : Mata Kuliah ID, Nama, Semester, Kelas
+  - cek mahasiswa yang telah ditambahkan http://7840b93e.ngrok.io/matakuliah
   
   ![IMG](https://github.com/2019-pemrogramanberbasiskerangkakerja-g/sistem-kehadiran-online-bertiga/blob/baru/IMG/Screenshot%20(92).png)
 
 - Tambah Peserta ke mata kuliah
   - Post /vtambahpeserta
-  - body : NRP, Mata Kuliah ID
+  - sent via body : NRP, Mata Kuliah ID
   
   ![IMG](https://github.com/2019-pemrogramanberbasiskerangkakerja-g/sistem-kehadiran-online-bertiga/blob/baru/IMG/Screenshot%20(93).png)
   
 - Tambah Jadwal Pertemuan untuk Mata Kuliah  
   - Post /vtambahjadwal
-  - body : ID Matkul, Pertemuan, Ruangan, Jam Mulai, Jam Selesai
+  - sent via body : ID Matkul, Pertemuan, Ruangan, Jam Mulai, Jam Selesai
   
   ![IMG](https://github.com/2019-pemrogramanberbasiskerangkakerja-g/sistem-kehadiran-online-bertiga/blob/baru/IMG/Screenshot%20(94).png)
   
 - Absen
   - Post /vabsen
-  - body : NRP, Ruangan
+  - sent via body : NRP, Ruangan
   
   ![IMG](https://github.com/2019-pemrogramanberbasiskerangkakerja-g/sistem-kehadiran-online-bertiga/blob/baru/IMG/Screenshot%20(95).png)
 
 - Rekap Semester
   - Get /vrekapsemester
-  - body : ID Mata Kuliah
 
   ![IMG](https://github.com/2019-pemrogramanberbasiskerangkakerja-g/sistem-kehadiran-online-bertiga/blob/baru/IMG/Screenshot%20(96).png)
 
 - Rekap Pertemuan
   - Get /vrekappertemuan
-  - body : ID Mata Kuliah, Pertemuan
+  
   ![IMG](https://github.com/2019-pemrogramanberbasiskerangkakerja-g/sistem-kehadiran-online-bertiga/blob/baru/IMG/Screenshot%20(102).png)
 
   - Setelah disubmit maka akan muncul rekap pertemuan dari ID mata kuliah dan pertemuan yang telah kita masukkan
@@ -131,7 +132,6 @@
 
 - Rekap Matakuliah Mahasiswa
   - Get /vrekapmahasiswa
-  - body : NRP, ID Mata Kuliah
   ![IMG](https://github.com/2019-pemrogramanberbasiskerangkakerja-g/sistem-kehadiran-online-bertiga/blob/baru/IMG/Screenshot%20(99).png)
 
   - maka akan tampil rekap dari nrp dan Id mata kuliah tersebut
@@ -139,7 +139,6 @@
 
 - Rekap Semester Mahasiswa
   - Get /vrekapmahasiswasem
-  - body : NRP, Semester
   ![IMG](https://github.com/2019-pemrogramanberbasiskerangkakerja-g/sistem-kehadiran-online-bertiga/blob/baru/IMG/Screenshot%20(101).png)
 
   - Maka akan tampil rekap seperti berikut

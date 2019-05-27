@@ -80,3 +80,52 @@
     <br>
 
 ## Dokumentasi View menggunakan Api Kelompok 5
+
+- Tampilan Awal Sistem Kehadiran Online
+
+[ss]
+
+- Tambah Mahasiswa baru
+  - Post /vtambahmahasiswa
+  - body : NRP, Nama, Password
+  
+  [ss]
+  
+- Tambah Mata Kuliah 
+  - Post /vtambahmatkul
+  - body : Mata Kuliah ID, Nama, Semester, Kelas
+  
+ [ss]
+
+- Tambah Peserta ke mata kuliah
+  - Post /vtambahpeserta
+  - body : NRP, Mata Kuliah ID
+  
+  [ss]
+  
+- Tambah Jadwal Pertemuan untuk Mata Kuliah  
+  - Post /vtambahjadwal
+  - body : ID Matkul, Pertemuan, Ruangan, Jam Mulai, Jam Selesai
+  
+  [ss]
+  
+- Absen
+  - Post /vabsen
+  - body : NRP, Ruangan
+  
+  [ss]
+
+- Rekap Semester
+
+- Rekap Pertemuan
+
+- Rekap Matakuliah Mahasiswa
+
+- Rekap Semester Mahasiswa
+
+  
+
+
+
+
+

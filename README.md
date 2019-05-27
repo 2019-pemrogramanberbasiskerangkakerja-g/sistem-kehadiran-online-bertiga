@@ -83,45 +83,57 @@
 
 - Tampilan Awal Sistem Kehadiran Online
 
-[ss]
+![IMG](https://github.com/2019-pemrogramanberbasiskerangkakerja-g/sistem-kehadiran-online-bertiga/blob/baru/IMG/Screenshot%20(82).png)
 
 - Tambah Mahasiswa baru
   - Post /vtambahmahasiswa
   - body : NRP, Nama, Password
   
-  [ss]
+  ![IMG](https://github.com/2019-pemrogramanberbasiskerangkakerja-g/sistem-kehadiran-online-bertiga/blob/baru/IMG/Screenshot%20(91).png)
   
 - Tambah Mata Kuliah 
   - Post /vtambahmatkul
   - body : Mata Kuliah ID, Nama, Semester, Kelas
   
- [ss]
+  ![IMG](https://github.com/2019-pemrogramanberbasiskerangkakerja-g/sistem-kehadiran-online-bertiga/blob/baru/IMG/Screenshot%20(92).png)
 
 - Tambah Peserta ke mata kuliah
   - Post /vtambahpeserta
   - body : NRP, Mata Kuliah ID
   
-  [ss]
+  ![IMG](https://github.com/2019-pemrogramanberbasiskerangkakerja-g/sistem-kehadiran-online-bertiga/blob/baru/IMG/Screenshot%20(93).png)
   
 - Tambah Jadwal Pertemuan untuk Mata Kuliah  
   - Post /vtambahjadwal
   - body : ID Matkul, Pertemuan, Ruangan, Jam Mulai, Jam Selesai
   
-  [ss]
+  ![IMG](https://github.com/2019-pemrogramanberbasiskerangkakerja-g/sistem-kehadiran-online-bertiga/blob/baru/IMG/Screenshot%20(94).png)
   
 - Absen
   - Post /vabsen
   - body : NRP, Ruangan
   
-  [ss]
+  ![IMG](https://github.com/2019-pemrogramanberbasiskerangkakerja-g/sistem-kehadiran-online-bertiga/blob/baru/IMG/Screenshot%20(95).png)
 
 - Rekap Semester
 
+  ![IMG](https://github.com/2019-pemrogramanberbasiskerangkakerja-g/sistem-kehadiran-online-bertiga/blob/baru/IMG/Screenshot%20(96).png)
+
 - Rekap Pertemuan
+
+  ![IMG](https://github.com/2019-pemrogramanberbasiskerangkakerja-g/sistem-kehadiran-online-bertiga/blob/baru/IMG/Screenshot%20(97).png)
 
 - Rekap Matakuliah Mahasiswa
 
+  ![IMG](https://github.com/2019-pemrogramanberbasiskerangkakerja-g/sistem-kehadiran-online-bertiga/blob/baru/IMG/Screenshot%20(99).png)
+
+  ![IMG](https://github.com/2019-pemrogramanberbasiskerangkakerja-g/sistem-kehadiran-online-bertiga/blob/baru/IMG/Screenshot%20(98).png)
+
 - Rekap Semester Mahasiswa
+
+  ![IMG](https://github.com/2019-pemrogramanberbasiskerangkakerja-g/sistem-kehadiran-online-bertiga/blob/baru/IMG/Screenshot%20(101).png)
+
+  ![IMG](https://github.com/2019-pemrogramanberbasiskerangkakerja-g/sistem-kehadiran-online-bertiga/blob/baru/IMG/Screenshot%20(100).png)
 
   
 

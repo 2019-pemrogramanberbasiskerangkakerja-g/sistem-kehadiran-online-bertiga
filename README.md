@@ -88,14 +88,14 @@
 - Tambah Mahasiswa baru
   - Post /vtambahmahasiswa
   - sent via body : NRP, Nama, Password
-  - cek mahasiswa yang telah ditambahkan http://7840b93e.ngrok.io/mahasiswa
+  - cek mahasiswa yang telah ditambahkan http://ef61238b.ngrok.io/mahasiswa
   
   ![IMG](https://github.com/2019-pemrogramanberbasiskerangkakerja-g/sistem-kehadiran-online-bertiga/blob/baru/IMG/Screenshot%20(91).png)
   
 - Tambah Mata Kuliah 
   - Post /vtambahmatkul
   - sent via body : Mata Kuliah ID, Nama, Semester, Kelas
-  - cek mahasiswa yang telah ditambahkan http://7840b93e.ngrok.io/matakuliah
+  - cek mahasiswa yang telah ditambahkan http://ef61238b.ngrok.io/matakuliah
   
   ![IMG](https://github.com/2019-pemrogramanberbasiskerangkakerja-g/sistem-kehadiran-online-bertiga/blob/baru/IMG/Screenshot%20(92).png)
 
@@ -121,6 +121,9 @@
   - Get /vrekapsemester
 
   ![IMG](https://github.com/2019-pemrogramanberbasiskerangkakerja-g/sistem-kehadiran-online-bertiga/blob/baru/IMG/Screenshot%20(96).png)
+
+  - maka akan muncul rekap dari matakuliah persemester
+  ![IMG](https://github.com/2019-pemrogramanberbasiskerangkakerja-g/sistem-kehadiran-online-bertiga/blob/baru/IMG/Screenshot%20(103).png)
 
 - Rekap Pertemuan
   - Get /vrekappertemuan
